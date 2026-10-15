@@ -1,850 +1,1013 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<title>Gallery | Biplov Devkota</title>
+
+<title>Gallery — Biplov Devkota</title>
+
+<meta name="theme-color" content="#07101e">
+
+<meta name="description" content="A private visual gallery by Biplov Devkota.">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap");
 
-/* ================= BASE STYLES ================= */
-body {
-    margin: 0; padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: url('bg.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #fff;
-    overflow-x: hidden;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap");
+
+
+
+:root{
+
+  color-scheme:dark;
+
+  --ice:#dff8ff;--cyan:#80eaff;--blue:#6daeff;
+
+  --glass:rgba(255,255,255,.075);
+
+  --glass-strong:rgba(255,255,255,.12);
+
+  --line:rgba(220,245,255,.18);
+
+  --muted:rgba(235,247,255,.62);
+
+  --ease:cubic-bezier(.2,.75,.25,1);
+
 }
 
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: -1;
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+
+  margin:0;min-height:100vh;padding:1px 0 32px;
+
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+
+  color:#f6fbff;overflow-x:hidden;
+
+  background:#07101e url("bg.jpg") center/cover fixed no-repeat;
+
+  -webkit-tap-highlight-color:transparent;
+
 }
 
-/* ================= PASSWORD PAGE STYLES ================= */
-#password-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #0a0a0a;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 20000;
-    transition: opacity 0.5s ease, visibility 0.5s;
+body::before{
+
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+
+  background:
+
+    radial-gradient(ellipse at 15% 5%,rgba(38,157,255,.18),transparent 38%),
+
+    radial-gradient(ellipse at 88% 35%,rgba(98,92,255,.15),transparent 36%),
+
+    linear-gradient(135deg,rgba(3,9,20,.82),rgba(6,15,30,.69) 55%,rgba(2,8,19,.86));
+
 }
 
-#password-screen.hidden {
-    opacity: 0;
-    visibility: hidden;
+body::after{
+
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.16;
+
+  background-image:radial-gradient(rgba(255,255,255,.5) .6px,transparent .6px);
+
+  background-size:28px 28px;mask-image:linear-gradient(to bottom,black,transparent 90%);
+
 }
 
-.pw-back-btn {
-    position: absolute;
-    top: 40px;
-    left: 5%;
-    text-decoration: none;
-    color: white;
-    font-family: 'Orbitron';
-    font-size: 11px;
-    letter-spacing: 1px;
-    opacity: 0.7;
-    transition: 0.3s;
+button,input,a{-webkit-tap-highlight-color:transparent}
+
+a{color:inherit}
+
+button{font:inherit}
+
+.liquid-text{
+
+  font-family:Orbitron,Inter,sans-serif;color:#fff;
+
+  text-shadow:0 0 22px rgba(111,220,255,.25);
+
 }
 
-.pw-back-btn:hover {
-    opacity: 1;
-    transform: translateX(-5px);
+.header{
+
+  width:min(1120px,calc(100% - 36px));margin:24px auto 26px;
+
+  display:flex;justify-content:space-between;align-items:center;gap:18px;
+
+  padding:16px 20px;border:1px solid var(--line);border-radius:22px;
+
+  background:linear-gradient(135deg,rgba(255,255,255,.105),rgba(255,255,255,.035));
+
+  box-shadow:0 16px 50px rgba(0,0,0,.18),inset 0 1px rgba(255,255,255,.12);
+
+  backdrop-filter:blur(24px) saturate(145%);-webkit-backdrop-filter:blur(24px) saturate(145%);
+
 }
 
-.pw-box {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 40px;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+.back-home,.pw-back-btn{
+
+  display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+
+  color:rgba(245,251,255,.76);font-family:Orbitron,Inter,sans-serif;
+
+  font-size:10px;font-weight:600;letter-spacing:1.2px;transition:color .25s,transform .25s;
+
 }
 
-.pw-box input {
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 12px 20px;
-    color: white;
-    font-family: 'Orbitron', sans-serif;
-    text-align: center;
-    border-radius: 8px;
-    outline: none;
-    transition: 0.3s;
+.back-home:hover,.pw-back-btn:hover{color:var(--cyan);transform:translateX(-3px)}
+
+.header .liquid-text{font-size:clamp(12px,2vw,16px);letter-spacing:clamp(1px,.35vw,3px);text-align:right}
+
+.gallery-container{
+
+  width:min(1120px,calc(100% - 36px));margin:0 auto 48px;
+
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+
+  grid-auto-rows:clamp(145px,16vw,205px);grid-auto-flow:dense;gap:16px;
+
 }
 
-.pw-box input:focus {
-    border-color: #fff;
+.gallery-item{
+
+  position:relative;min-width:0;overflow:hidden;isolation:isolate;
+
+  border-radius:22px;border:1px solid rgba(225,247,255,.19);
+
+  background:rgba(255,255,255,.055);cursor:pointer;
+
+  box-shadow:0 12px 30px rgba(0,0,0,.17),inset 0 1px rgba(255,255,255,.13);
+
+  transform:translateZ(0);transition:transform .45s var(--ease),border-color .35s,box-shadow .4s;
+
 }
 
-.error-shake {
-    animation: shake 0.4s;
+.gallery-item::before{
+
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;
+
+  background:linear-gradient(135deg,rgba(255,255,255,.17),transparent 24%,transparent 68%,rgba(110,220,255,.08));
+
+  opacity:.65;transition:opacity .35s;
+
 }
 
-@keyframes shake {
-    0%, 100% {
-        transform: translateX(0);
-    }
+.gallery-item::after{
 
-    25% {
-        transform: translateX(-10px);
-    }
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
 
-    75% {
-        transform: translateX(10px);
-    }
+  background:linear-gradient(180deg,transparent 35%,rgba(2,7,17,.04) 48%,rgba(2,7,17,.78));
+
+  opacity:.7;transition:opacity .35s;
+
 }
 
-/* ================= GALLERY STYLES ================= */
-.liquid-text {
-    font-family: "Orbitron", sans-serif;
-    color: white;
-    text-shadow: 0 0 8px rgba(255,255,255,0.4);
+.gallery-item:hover{
+
+  transform:translateY(-4px) scale(1.008);border-color:rgba(143,230,255,.52);
+
+  box-shadow:0 22px 44px rgba(0,0,0,.28),0 0 0 1px rgba(104,211,255,.08),0 0 28px rgba(62,176,255,.1);
+
 }
 
-.header {
-    width: 90%;
-    max-width: 1000px;
-    margin: 20px auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.gallery-item:hover::before{opacity:1}
+
+.gallery-item img{
+
+  display:block;width:100%;height:100%;object-fit:cover;
+
+  transition:transform .85s var(--ease),opacity .6s ease;pointer-events:none;
+
 }
 
-.back-home {
-    text-decoration: none;
-    color: white;
-    font-family: 'Orbitron';
-    font-size: 11px;
-    letter-spacing: 1px;
-    opacity: 0.7;
-    transition: 0.3s;
+.gallery-item:hover img{transform:scale(1.055)}
+
+.featured-wrapper{position:relative;width:100%;height:100%;overflow:hidden}
+
+.featured-wrapper img{position:absolute;inset:0}
+
+#imgBack{filter:blur(1px) brightness(.72);transform:scale(1.04)}
+
+#featuredImg{object-fit:cover}
+
+.item-tall{grid-row:span 2}
+
+.item-wide{grid-column:span 2}
+
+.item-featured{grid-column:span 2;grid-row:span 2}
+
+.item-overlay{
+
+  position:absolute;left:0;right:0;bottom:0;z-index:4;
+
+  padding:32px 16px 16px;opacity:.9;pointer-events:none;
+
+  background:linear-gradient(transparent,rgba(1,7,18,.28));
+
+  transition:opacity .3s,transform .3s;
+
 }
 
-.back-home:hover {
-    opacity: 1;
-    transform: translateX(-5px);
+.item-title{
+
+  display:inline-flex;align-items:center;gap:8px;
+
+  font-family:Orbitron,Inter,sans-serif;font-size:11px;font-weight:600;
+
+  letter-spacing:1.5px;color:#f5fcff;text-shadow:0 2px 14px rgba(0,0,0,.45);
+
 }
 
-.gallery-container {
-    width: 90%;
-    max-width: 1100px;
-    margin: 0 auto 50px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 200px;
-    gap: 20px;
+.item-title::before{
+
+  content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+
+  background:var(--cyan);box-shadow:0 0 12px rgba(128,234,255,.9);
+
 }
 
-.gallery-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.1);
-    cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+.gallery-item:hover .item-overlay{opacity:1;transform:translateY(-2px)}
+
+#password-screen{
+
+  position:fixed;inset:0;z-index:20000;display:flex;flex-direction:column;
+
+  justify-content:center;align-items:center;padding:24px;
+
+  background:radial-gradient(ellipse at 50% 25%,rgba(31,111,170,.23),transparent 48%),
+
+    linear-gradient(135deg,rgba(3,9,20,.97),rgba(8,17,32,.97));
+
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+
+  transition:opacity .45s ease,visibility .45s ease;
+
 }
 
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.8s ease-in-out;
-    pointer-events: none;
+#password-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+
+.pw-back-btn{position:absolute;top:34px;left:max(24px,calc((100% - 1080px)/2))}
+
+.pw-box{
+
+  width:min(100%,390px);padding:38px 30px 32px;text-align:center;
+
+  border-radius:28px;border:1px solid rgba(223,246,255,.2);
+
+  background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.045));
+
+  box-shadow:0 30px 100px rgba(0,0,0,.36),inset 0 1px rgba(255,255,255,.16),0 0 50px rgba(67,172,255,.08);
+
+  backdrop-filter:blur(28px) saturate(150%);-webkit-backdrop-filter:blur(28px) saturate(150%);
+
 }
 
-.gallery-item:hover img {
-    transform: scale(1.08);
+
+.pw-box .liquid-text{font-size:13px!important;letter-spacing:2px;margin-bottom:10px!important}
+
+.pw-subtitle{margin:0 0 23px;color:var(--muted);font-size:12px;line-height:1.6}
+
+.pw-box input{
+
+  width:100%;padding:15px 16px;border-radius:14px;outline:none;
+
+  color:#fff;background:rgba(1,8,18,.35);border:1px solid rgba(224,246,255,.19);
+
+  font:600 12px Orbitron,Inter,sans-serif;letter-spacing:2px;text-align:center;
+
+  transition:border-color .25s,box-shadow .25s,*background* .25s;
+
 }
 
-.featured-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
+.pw-box input::placeholder{color:rgba(235,247,255,.4)}
+
+.pw-box input:focus{border-color:rgba(128,234,255,.72);background:rgba(1,8,18,.52);box-shadow:0 0 0 4px rgba(128,234,255,.09),0 0 24px rgba(89,193,255,.1)}
+
+.pw-hint{margin-top:16px;font-size:10px;letter-spacing:.4px;color:rgba(235,247,255,.42)}
+
+.error-shake{animation:shake .36s ease}
+
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+
+#lightbox{
+
+  position:fixed;inset:0;z-index:10000;display:none;justify-content:center;align-items:center;
+
+  padding:76px 72px 34px;background:rgba(3,8,18,.82);
+
+  backdrop-filter:blur(28px) saturate(130%);-webkit-backdrop-filter:blur(28px) saturate(130%);
+
 }
 
-.featured-wrapper img {
-    position: absolute;
-    top: 0;
-    left: 0;
+#lightbox.active{display:flex;animation:lbFade .22s ease}
+
+@keyframes lbFade{from{opacity:0}to{opacity:1}}
+
+#lbImg{
+
+  max-width:min(100%,1400px);max-height:100%;width:auto;height:auto;object-fit:contain;
+
+  border-radius:18px;border:1px solid rgba(240,250,255,.18);
+
+  box-shadow:0 30px 90px rgba(0,0,0,.5),0 0 35px rgba(94,198,255,.08);
+
+  pointer-events:none;
+
 }
 
-.item-tall {
-    grid-row: span 2;
+.lb-btn{
+
+  position:absolute;display:grid;place-items:center;width:46px;height:46px;padding:0;
+
+  color:#f8fcff;text-decoration:none;cursor:pointer;
+
+  border:1px solid rgba(232,248,255,.2);border-radius:16px;
+
+  background:rgba(255,255,255,.09);box-shadow:inset 0 1px rgba(255,255,255,.12);
+
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+
+  transition:*background* .25s,border-color .25s,transform .25s;
+
 }
 
-.item-wide {
-    grid-column: span 2;
+.lb-btn:hover{background:rgba(128,234,255,.16);border-color:rgba(128,234,255,.5);transform:translateY(-2px)}
+
+.lb-close{top:22px;right:22px;font-size:18px}
+
+.lb-download{top:22px;left:22px}
+
+.lb-prev,.lb-next{top:50%;transform:translateY(-50%);font-size:24px}
+
+.lb-prev{left:18px}.lb-next{right:18px}
+
+.lb-prev:hover,.lb-next:hover{transform:translateY(calc(-50% - 2px))}
+
+.lb-counter{
+
+  position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+
+  padding:8px 13px;border:1px solid rgba(232,248,255,.15);border-radius:999px;
+
+  background:rgba(255,255,255,.07);color:rgba(245,251,255,.75);
+
+  font:10px Orbitron,Inter,sans-serif;letter-spacing:1.4px;
+
+  backdrop-filter:blur(14px);
+
 }
 
-.item-featured {
-    grid-column: span 2;
-    grid-row: span 2;
+@media(min-width:1400px){.gallery-container{grid-auto-rows:210px;gap:18px}}
+
+@media(max-width:900px){
+
+  .gallery-container{grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:clamp(145px,24vw,205px);gap:13px}
+
+  .item-featured{grid-column:span 2;grid-row:span 2}
+
+  .header{margin-top:16px}
+
 }
 
-.item-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
-    padding: 15px;
-    opacity: 0;
-    transition: 0.4s;
-    z-index: 10;
+@media(max-width:620px){
+
+  body{background-attachment:scroll}
+
+  .header{width:calc(100% - 24px);margin:12px auto 18px;padding:14px;border-radius:18px;gap:10px}
+
+  .back-home{font-size:9px;letter-spacing:.6px;white-space:nowrap}
+
+  .header .liquid-text{font-size:11px;letter-spacing:1px}
+
+  .gallery-container{width:calc(100% - 24px);grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:clamp(135px,34vw,190px);gap:10px}
+
+  .gallery-item{border-radius:17px}
+
+  .item-wide,.item-featured{grid-column:span 2}
+
+  .item-featured{grid-row:span 2}
+
+  .item-tall{grid-row:span 2}
+
+  .item-overlay{padding:24px 12px 12px}
+
+  .item-title{font-size:10px;letter-spacing:1px}
+
+  #lightbox{padding:78px 14px 56px}
+
+  #lbImg{max-width:100%;max-height:100%;border-radius:12px}
+
+  .lb-btn{width:42px;height:42px;border-radius:14px}
+
+  .lb-close{top:15px;right:15px}.lb-download{top:15px;left:15px}
+
+  .lb-prev,.lb-next{top:auto;bottom:12px;transform:none}
+
+  .lb-prev{left:calc(50% - 52px)}.lb-next{right:calc(50% - 52px)}
+
+  .lb-prev:hover,.lb-next:hover{transform:translateY(-2px)}
+
+  .lb-counter{bottom:23px;font-size:9px}
+
+  .pw-box{padding:32px 22px 26px;border-radius:24px}
+
+  .pw-back-btn{top:22px;left:20px;font-size:9px}
+
 }
 
-.gallery-item:hover .item-overlay {
-    opacity: 1;
+@media(prefers-reduced-motion:reduce){
+
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+
 }
 
-.item-title {
-    font-family: 'Orbitron';
-    font-size: 12px;
-    letter-spacing: 1px;
-}
 
-#lightbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.95);
-    backdrop-filter: blur(20px);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-}
+/* Minimal UI deterrents */
+html, body, body * { -webkit-user-select: none !important; user-select: none !important; -webkit-touch-callout: none; }
+input, textarea, select, [contenteditable="true"] { -webkit-user-select: text !important; user-select: text !important; }
+img { -webkit-user-drag: none !important; }
 
-#lightbox.active {
-    display: flex;
-}
-
-#lightbox img {
-    max-width: 85%;
-    max-height: 80%;
-    border-radius: 12px;
-    pointer-events: none;
-}
-
-.lb-btn {
-    position: absolute;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    color: white;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.3s;
-}
-
-.lb-btn:hover {
-    background: rgba(255,255,255,0.2);
-    transform: scale(1.1);
-}
-
-.lb-close {
-    top: 25px;
-    right: 25px;
-    font-size: 20px;
-}
-
-.lb-download {
-    top: 25px;
-    left: 25px;
-}
-
-@media (max-width: 900px) {
-    .gallery-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .item-featured {
-        grid-column: span 2;
-        grid-row: span 1;
-    }
-}
 </style>
+
 </head>
+
+
 
 <body>
 
+
+
     <div id="password-screen">
+
         <a href="index.html" class="pw-back-btn">← BACK TO HOME</a>
 
+
+
         <div class="pw-box" id="pw-container">
-            <div class="liquid-text" style="font-size: 14px; margin-bottom: 20px;">
-                ACCESS RESTRICTED
-            </div>
+
+
+            <div class="liquid-text"><h3>ACCESS RESTRICTED</div>
+
+            <p class="pw-subtitle"></p>
+
+
 
             <input
+
                 type="password"
+
                 id="pw-input"
+
                 placeholder="ENTER PASSCODE"
+
                 autofocus
-                autocomplete="off"
+
+                autocomplete="current-password"
+
+                aria-label="Gallery passcode"
+
+                aria-describedby="pw-hint"
+
+                inputmode="numeric"
+
+                required
+
             >
+
+            <div class="pw-hint" id="pw-hint"></div>
+
         </div>
+
     </div>
 
+
+
     <header class="header">
+
         <a href="index.html" class="back-home">← BACK TO HOME</a>
 
+
+
         <div class="liquid-text"
+
              style="font-size: 18px; letter-spacing: 3px;">
+
             GALLERY(UP 2 NOW)
+
         </div>
+
     </header>
+
+
 
     <div class="gallery-container">
 
         <!-- IMAGE 01 -->
+
         <div class="gallery-item item-featured" onclick="openLightbox(0)">
+
             <div class="featured-wrapper">
+
                 <img id="imgBack" src="img2.jpg" alt="Featured Background">
+
                 <img id="featuredImg" src="img1.jpg" alt="Featured Foreground">
+
             </div>
 
             <div class="item-overlay">
-                <div class="item-title">MOON 01</div>
+
+                <div class="item-title"> 01</div>
+
             </div>
+
         </div>
 
-        <!-- IMAGE 02 - 10 -->
-        <div class="gallery-item" onclick="openLightbox(1)">
-            <img src="img2.jpg">
-            <div class="item-overlay"><div class="item-title">02</div></div>
-        </div>
 
-        <div class="gallery-item item-tall" onclick="openLightbox(2)">
-            <img src="img3.jpg">
-            <div class="item-overlay"><div class="item-title">03</div></div>
-        </div>
 
-        <div class="gallery-item item-wide" onclick="openLightbox(3)">
-            <img src="img4.jpg">
-            <div class="item-overlay"><div class="item-title">04</div></div>
-        </div>
+        <!-- IMAGES 02 - 60 -->
 
-        <div class="gallery-item" onclick="openLightbox(4)">
-            <img src="img5.jpg">
-            <div class="item-overlay"><div class="item-title">05</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(1)"><img src="img2.jpg"><div class="item-overlay"><div class="item-title">02</div></div></div>
 
-        <div class="gallery-item" onclick="openLightbox(5)">
-            <img src="img6.jpg">
-            <div class="item-overlay"><div class="item-title">06</div></div>
-        </div>
+        <div class="gallery-item item-tall" onclick="openLightbox(2)"><img src="img3.jpg"><div class="item-overlay"><div class="item-title">03</div></div></div>
 
-        <div class="gallery-item" onclick="openLightbox(6)">
-            <img src="img7.jpg">
-            <div class="item-overlay"><div class="item-title">07</div></div>
-        </div>
+        <div class="gallery-item item-wide" onclick="openLightbox(3)"><img src="img4.jpg"><div class="item-overlay"><div class="item-title">04</div></div></div>
 
-        <div class="gallery-item item-wide" onclick="openLightbox(7)">
-            <img src="img8.jpg">
-            <div class="item-overlay"><div class="item-title">08</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(4)"><img src="img5.jpg"><div class="item-overlay"><div class="item-title">05</div></div></div>
 
-        <div class="gallery-item" onclick="openLightbox(8)">
-            <img src="img9.jpg">
-            <div class="item-overlay"><div class="item-title">09</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(5)"><img src="img6.jpg"><div class="item-overlay"><div class="item-title">06</div></div></div>
 
-        <div class="gallery-item item-tall" onclick="openLightbox(9)">
-            <img src="img10.jpg">
-            <div class="item-overlay"><div class="item-title">10</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(6)"><img src="img7.jpg"><div class="item-overlay"><div class="item-title">07</div></div></div>
 
-        <!-- IMAGE 11 - 20 -->
-        <div class="gallery-item" onclick="openLightbox(10)">
-            <img src="img11.jpg">
-            <div class="item-overlay"><div class="item-title">11</div></div>
-        </div>
+        <div class="gallery-item item-wide" onclick="openLightbox(7)"><img src="img8.jpg"><div class="item-overlay"><div class="item-title">08</div></div></div>
 
-        <div class="gallery-item" onclick="openLightbox(11)">
-            <img src="img12.jpg">
-            <div class="item-overlay"><div class="item-title">12</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(8)"><img src="img9.jpg"><div class="item-overlay"><div class="item-title">09</div></div></div>
 
-        <div class="gallery-item item-wide" onclick="openLightbox(12)">
-            <img src="img13.jpg">
-            <div class="item-overlay"><div class="item-title">13</div></div>
-        </div>
+        <div class="gallery-item item-tall" onclick="openLightbox(9)"><img src="img10.jpg"><div class="item-overlay"><div class="item-title">10</div></div></div>
 
-        <div class="gallery-item" onclick="openLightbox(13)">
-            <img src="img14.jpg">
-            <div class="item-overlay"><div class="item-title">14</div></div>
-        </div>
 
-        <div class="gallery-item" onclick="openLightbox(14)">
-            <img src="img15.jpg">
-            <div class="item-overlay"><div class="item-title">15</div></div>
-        </div>
 
-        <div class="gallery-item" onclick="openLightbox(15)">
-            <img src="img16.jpg">
-            <div class="item-overlay"><div class="item-title">16</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(10)"><img src="img11.jpg"><div class="item-overlay"><div class="item-title">11</div></div></div>
 
-        <div class="gallery-item item-tall" onclick="openLightbox(16)">
-            <img src="img17.jpg">
-            <div class="item-overlay"><div class="item-title">17</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(11)"><img src="img12.jpg"><div class="item-overlay"><div class="item-title">12</div></div></div>
 
-        <div class="gallery-item" onclick="openLightbox(17)">
-            <img src="img18.jpg">
-            <div class="item-overlay"><div class="item-title">18</div></div>
-        </div>
+        <div class="gallery-item item-wide" onclick="openLightbox(12)"><img src="img13.jpg"><div class="item-overlay"><div class="item-title">13</div></div></div>
 
-        <div class="gallery-item item-wide" onclick="openLightbox(18)">
-            <img src="img19.jpg">
-            <div class="item-overlay"><div class="item-title">19</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(13)"><img src="img14.jpg"><div class="item-overlay"><div class="item-title">14</div></div></div>
 
-        <div class="gallery-item" onclick="openLightbox(19)">
-            <img src="img20.jpg">
-            <div class="item-overlay"><div class="item-title">20</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(14)"><img src="img15.jpg"><div class="item-overlay"><div class="item-title">15</div></div></div>
 
-        <!-- IMAGE 21 - 30 -->
-        <div class="gallery-item" onclick="openLightbox(20)">
-            <img src="img21.jpg">
-            <div class="item-overlay"><div class="item-title">21</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(15)"><img src="img16.jpg"><div class="item-overlay"><div class="item-title">16</div></div></div>
 
-        <div class="gallery-item" onclick="openLightbox(21)">
-            <img src="img22.jpg">
-            <div class="item-overlay"><div class="item-title">22</div></div>
-        </div>
+        <div class="gallery-item item-tall" onclick="openLightbox(16)"><img src="img17.jpg"><div class="item-overlay"><div class="item-title">17</div></div></div>
 
-        <div class="gallery-item item-wide" onclick="openLightbox(22)">
-            <img src="img23.jpg">
-            <div class="item-overlay"><div class="item-title">23</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(17)"><img src="img18.jpg"><div class="item-overlay"><div class="item-title">18</div></div></div>
 
-        <div class="gallery-item" onclick="openLightbox(23)">
-            <img src="img24.jpg">
-            <div class="item-overlay"><div class="item-title">24</div></div>
-        </div>
+        <div class="gallery-item item-wide" onclick="openLightbox(18)"><img src="img19.jpg"><div class="item-overlay"><div class="item-title">19</div></div></div>
 
-        <div class="gallery-item item-tall" onclick="openLightbox(24)">
-            <img src="img25.jpg">
-            <div class="item-overlay"><div class="item-title">25</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(19)"><img src="img20.jpg"><div class="item-overlay"><div class="item-title">20</div></div></div>
 
-        <div class="gallery-item" onclick="openLightbox(25)">
-            <img src="img26.jpg">
-            <div class="item-overlay"><div class="item-title">26</div></div>
-        </div>
 
-        <div class="gallery-item" onclick="openLightbox(26)">
-            <img src="img27.jpg">
-            <div class="item-overlay"><div class="item-title">27</div></div>
-        </div>
 
-        <div class="gallery-item item-wide" onclick="openLightbox(27)">
-            <img src="img28.jpg">
-            <div class="item-overlay"><div class="item-title">28</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(20)"><img src="img21.jpg"><div class="item-overlay"><div class="item-title">21</div></div></div>
 
-        <div class="gallery-item" onclick="openLightbox(28)">
-            <img src="img29.jpg">
-            <div class="item-overlay"><div class="item-title">29</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(21)"><img src="img22.jpg"><div class="item-overlay"><div class="item-title">22</div></div></div>
 
-        <div class="gallery-item" onclick="openLightbox(29)">
-            <img src="img30.jpg">
-            <div class="item-overlay"><div class="item-title">30</div></div>
-        </div>
+        <div class="gallery-item item-wide" onclick="openLightbox(22)"><img src="img23.jpg"><div class="item-overlay"><div class="item-title">23</div></div></div>
 
-        <!-- IMAGE 31 - 40 -->
-        <div class="gallery-item" onclick="openLightbox(30)">
-            <img src="img31.jpg">
-            <div class="item-overlay"><div class="item-title">31</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(23)"><img src="img24.jpg"><div class="item-overlay"><div class="item-title">24</div></div></div>
 
-        <div class="gallery-item item-tall" onclick="openLightbox(31)">
-            <img src="img32.jpg">
-            <div class="item-overlay"><div class="item-title">32</div></div>
-        </div>
+        <div class="gallery-item item-tall" onclick="openLightbox(24)"><img src="img25.jpg"><div class="item-overlay"><div class="item-title">25</div></div></div>
 
-        <div class="gallery-item" onclick="openLightbox(32)">
-            <img src="img33.jpg">
-            <div class="item-overlay"><div class="item-title">33</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(25)"><img src="img26.jpg"><div class="item-overlay"><div class="item-title">26</div></div></div>
 
-        <div class="gallery-item" onclick="openLightbox(33)">
-            <img src="img34.jpg">
-            <div class="item-overlay"><div class="item-title">34</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(26)"><img src="img27.jpg"><div class="item-overlay"><div class="item-title">27</div></div></div>
 
-        <div class="gallery-item item-wide" onclick="openLightbox(34)">
-            <img src="img35.jpg">
-            <div class="item-overlay"><div class="item-title">35</div></div>
-        </div>
+        <div class="gallery-item item-wide" onclick="openLightbox(27)"><img src="img28.jpg"><div class="item-overlay"><div class="item-title">28</div></div></div>
 
-        <div class="gallery-item" onclick="openLightbox(35)">
-            <img src="img36.jpg">
-            <div class="item-overlay"><div class="item-title">36</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(28)"><img src="img29.jpg"><div class="item-overlay"><div class="item-title">29</div></div></div>
 
-        <div class="gallery-item item-tall" onclick="openLightbox(36)">
-            <img src="img37.jpg">
-            <div class="item-overlay"><div class="item-title">37</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(29)"><img src="img30.jpg"><div class="item-overlay"><div class="item-title">30</div></div></div>
 
-        <div class="gallery-item" onclick="openLightbox(37)">
-            <img src="img38.jpg">
-            <div class="item-overlay"><div class="item-title">38</div></div>
-        </div>
 
-        <div class="gallery-item item-wide" onclick="openLightbox(38)">
-            <img src="img39.jpg">
-            <div class="item-overlay"><div class="item-title">39</div></div>
-        </div>
 
-        <div class="gallery-item" onclick="openLightbox(39)">
-            <img src="img40.jpg">
-            <div class="item-overlay"><div class="item-title">40</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(30)"><img src="img31.jpg"><div class="item-overlay"><div class="item-title">31</div></div></div>
 
-        <!-- IMAGE 41 - 43 -->
-        <div class="gallery-item" onclick="openLightbox(40)">
-            <img src="img41.jpg">
-            <div class="item-overlay"><div class="item-title">41</div></div>
-        </div>
+        <div class="gallery-item item-tall" onclick="openLightbox(31)"><img src="img32.jpg"><div class="item-overlay"><div class="item-title">32</div></div></div>
 
-        <div class="gallery-item" onclick="openLightbox(41)">
-            <img src="img42.jpg">
-            <div class="item-overlay"><div class="item-title">42</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(32)"><img src="img33.jpg"><div class="item-overlay"><div class="item-title">33</div></div></div>
 
-        <div class="gallery-item" onclick="openLightbox(42)">
-            <img src="img43.jpg">
-            <div class="item-overlay"><div class="item-title">43</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(33)"><img src="img34.jpg"><div class="item-overlay"><div class="item-title">34</div></div></div>
 
-        <!-- IMAGE 44 -->
-        <div class="gallery-item" onclick="openLightbox(43)">
-            <img src="img44.jpg">
-            <div class="item-overlay"><div class="item-title">44</div></div>
-        </div>
+        <div class="gallery-item item-wide" onclick="openLightbox(34)"><img src="img35.jpg"><div class="item-overlay"><div class="item-title">35</div></div></div>
 
-        <!-- IMAGE 45 -->
-        <div class="gallery-item item-wide" onclick="openLightbox(44)">
-            <img src="img45.jpg">
-            <div class="item-overlay"><div class="item-title">45</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(35)"><img src="img36.jpg"><div class="item-overlay"><div class="item-title">36</div></div></div>
 
-        <!-- IMAGE 46 -->
-        <div class="gallery-item" onclick="openLightbox(45)">
-            <img src="img46.jpg">
-            <div class="item-overlay"><div class="item-title">46</div></div>
-        </div>
+        <div class="gallery-item item-tall" onclick="openLightbox(36)"><img src="img37.jpg"><div class="item-overlay"><div class="item-title">37</div></div></div>
 
-        <!-- IMAGE 47 -->
-        <div class="gallery-item item-tall" onclick="openLightbox(46)">
-            <img src="img47.jpg">
-            <div class="item-overlay"><div class="item-title">47</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(37)"><img src="img38.jpg"><div class="item-overlay"><div class="item-title">38</div></div></div>
 
-        <!-- IMAGE 48 -->
-        <div class="gallery-item" onclick="openLightbox(47)">
-            <img src="img48.jpg">
-            <div class="item-overlay"><div class="item-title">48</div></div>
-        </div>
+        <div class="gallery-item item-wide" onclick="openLightbox(38)"><img src="img39.jpg"><div class="item-overlay"><div class="item-title">39</div></div></div>
 
-        <!-- IMAGE 49 -->
-        <div class="gallery-item" onclick="openLightbox(48)">
-            <img src="img49.jpg">
-            <div class="item-overlay"><div class="item-title">49</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(39)"><img src="img40.jpg"><div class="item-overlay"><div class="item-title">40</div></div></div>
 
-        <!-- IMAGE 50 -->
-        <div class="gallery-item item-wide" onclick="openLightbox(49)">
-            <img src="img50.jpg">
-            <div class="item-overlay"><div class="item-title">50</div></div>
-        </div>
 
-        <!-- IMAGE 51 -->
-        <div class="gallery-item" onclick="openLightbox(50)">
-            <img src="img51.jpg">
-            <div class="item-overlay"><div class="item-title">51</div></div>
-        </div>
 
-        <!-- IMAGE 52 -->
-        <div class="gallery-item" onclick="openLightbox(51)">
-            <img src="img52.jpg">
-            <div class="item-overlay"><div class="item-title">52</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(40)"><img src="img41.jpg"><div class="item-overlay"><div class="item-title">41</div></div></div>
 
-        <!-- IMAGE 53 -->
-        <div class="gallery-item item-tall" onclick="openLightbox(52)">
-            <img src="img53.jpg">
-            <div class="item-overlay"><div class="item-title">53</div></div>
-        </div>
+        <div class="gallery-item" onclick="openLightbox(41)"><img src="img42.jpg"><div class="item-overlay"><div class="item-title">42</div></div></div>
+
+        <div class="gallery-item" onclick="openLightbox(42)"><img src="img43.jpg"><div class="item-overlay"><div class="item-title">43</div></div></div>
+
+        <div class="gallery-item" onclick="openLightbox(43)"><img src="img44.jpg"><div class="item-overlay"><div class="item-title">44</div></div></div>
+
+        <div class="gallery-item item-wide" onclick="openLightbox(44)"><img src="img45.jpg"><div class="item-overlay"><div class="item-title">45</div></div></div>
+
+        <div class="gallery-item" onclick="openLightbox(45)"><img src="img46.jpg"><div class="item-overlay"><div class="item-title">46</div></div></div>
+
+        <div class="gallery-item item-tall" onclick="openLightbox(46)"><img src="img47.jpg"><div class="item-overlay"><div class="item-title">47</div></div></div>
+
+        <div class="gallery-item" onclick="openLightbox(47)"><img src="img48.jpg"><div class="item-overlay"><div class="item-title">48</div></div></div>
+
+        <div class="gallery-item" onclick="openLightbox(48)"><img src="img49.jpg"><div class="item-overlay"><div class="item-title">49</div></div></div>
+
+        <div class="gallery-item item-wide" onclick="openLightbox(49)"><img src="img50.jpg"><div class="item-overlay"><div class="item-title">50</div></div></div>
+
+
+
+        <div class="gallery-item" onclick="openLightbox(50)"><img src="img51.jpg"><div class="item-overlay"><div class="item-title">51</div></div></div>
+
+        <div class="gallery-item" onclick="openLightbox(51)"><img src="img52.jpg"><div class="item-overlay"><div class="item-title">52</div></div></div>
+
+        <div class="gallery-item item-tall" onclick="openLightbox(52)"><img src="img53.jpg"><div class="item-overlay"><div class="item-title">53</div></div></div>
+
+        <div class="gallery-item item-tall" onclick="openLightbox(53)"><img src="img54.jpg"><div class="item-overlay"><div class="item-title">54</div></div></div>
+
+        <div class="gallery-item item-tall" onclick="openLightbox(54)"><img src="img55.jpg"><div class="item-overlay"><div class="item-title">55</div></div></div>
+
+        <div class="gallery-item item-tall" onclick="openLightbox(55)"><img src="img56.jpg"><div class="item-overlay"><div class="item-title">56</div></div></div>
+
+        <div class="gallery-item item-tall" onclick="openLightbox(56)"><img src="img57.jpg"><div class="item-overlay"><div class="item-title">57</div></div></div>
+
+        <div class="gallery-item item-tall" onclick="openLightbox(57)"><img src="img58.jpg"><div class="item-overlay"><div class="item-title">58</div></div></div>
+
+        <div class="gallery-item item-tall" onclick="openLightbox(58)"><img src="img59.jpg"><div class="item-overlay"><div class="item-title">59</div></div></div>
+
+        <div class="gallery-item item-tall" onclick="openLightbox(59)"><img src="img60.jpg"><div class="item-overlay"><div class="item-title">60</div></div></div>
 
     </div>
 
+
+
     <!-- ================= LIGHTBOX ================= -->
+
     <div id="lightbox">
 
-        <button class="lb-btn lb-close" onclick="closeLightbox()">
-            ✕
-        </button>
+        <button class="lb-btn lb-close" onclick="closeLightbox()">✕</button>
 
-        <a id="downloadLink"
-           href="#"
-           download
-           class="lb-btn lb-download">
 
-            <svg viewBox="0 0 24 24"
-                 width="20"
-                 fill="white">
+
+        <a id="downloadLink" href="#" download class="lb-btn lb-download">
+
+            <svg viewBox="0 0 24 24" width="20" fill="white">
+
                 <path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/>
+
             </svg>
 
         </a>
 
-        <img id="lbImg" src="">
+
+
+        <button type="button" class="lb-btn lb-prev" id="lbPrev" aria-label="Previous image">‹</button>
+
+        <button type="button" class="lb-btn lb-next" id="lbNext" aria-label="Next image">›</button>
+
+        <img id="lbImg" src="" alt="Selected gallery image">
+
+        <div class="lb-counter" id="lbCounter" aria-live="polite">01 / 60</div>
+
     </div>
+
+
 
     <script>
 
-        // --- 1. Enhanced Anti-DevTools Anti-Tamper Logic ---
-        (function() {
+(() => {
 
-            // Block right click
-            document.addEventListener('contextmenu', event =>
-                event.preventDefault()
-            );
+  "use strict";
 
-            // Block common shortcut key combinations
-            document.addEventListener('keydown', function(e) {
 
-                if (
-                    e.keyCode === 123 || // F12
-                    (e.ctrlKey && e.shiftKey && e.keyCode === 73) || // Ctrl+Shift+I
-                    (e.ctrlKey && e.shiftKey && e.keyCode === 74) || // Ctrl+Shift+J
-                    (e.ctrlKey && e.shiftKey && e.keyCode === 67) || // Ctrl+Shift+C
-                    (e.ctrlKey && e.keyCode === 85) // Ctrl+U
-                ) {
-                    e.preventDefault();
-                    return false;
-                }
 
-            });
+  const passwordInput = document.getElementById("pw-input");
 
-            // Debugger Loop
-            function devToolsTrap() {
+  const passwordScreen = document.getElementById("password-screen");
 
-                function trap(i) {
+  const pwContainer = document.getElementById("pw-container");
 
-                    if (
-                        ("" + i / i).length !== 1 ||
-                        i % 20 === 0
-                    ) {
-                        (function() {}).constructor("debugger")();
-                    } else {
-                        (function() {}).constructor("debugger")();
-                    }
+  const correctPassword = "20090603";
 
-                    trap(++i);
-                }
+  const accessKey = "gallery_access";
 
-                try {
-                    trap(0);
-                } catch (e) {}
 
-            }
 
-            // Run debugger trap continually
-            setInterval(devToolsTrap, 50);
+  function unlockGallery() {
 
-        })();
+    passwordScreen.classList.add("hidden");
 
+    sessionStorage.setItem(accessKey, "true");
 
-        // --- 2. Password Logic ---
+    window.setTimeout(() => { passwordScreen.style.display = "none"; }, 480);
 
-        const passwordInput =
-            document.getElementById('pw-input');
+  }
 
-        const passwordScreen =
-            document.getElementById('password-screen');
 
-        const pwContainer =
-            document.getElementById('pw-container');
 
-        const correctPassword = "20090603";
+  if (sessionStorage.getItem(accessKey) === "true") {
 
+    passwordScreen.style.display = "none";
 
-        passwordInput.addEventListener('input', (e) => {
+  } else {
 
-            if (e.target.value === correctPassword) {
+    passwordInput.focus({ preventScroll: true });
 
-                passwordScreen.classList.add('hidden');
+  }
 
-                sessionStorage.setItem(
-                    'gallery_access',
-                    'true'
-                );
 
-            }
 
-            else if (
-                e.target.value.length >=
-                correctPassword.length
-            ) {
+  passwordInput.addEventListener("input", () => {
 
-                pwContainer.classList.add('error-shake');
+    if (passwordInput.value === correctPassword) {
 
-                setTimeout(() => {
+      unlockGallery();
 
-                    pwContainer.classList.remove(
-                        'error-shake'
-                    );
+      return;
 
-                    e.target.value = "";
+    }
 
-                }, 500);
+    if (passwordInput.value.length >= correctPassword.length) {
 
-            }
+      pwContainer.classList.remove("error-shake");
 
-        });
+      void pwContainer.offsetWidth;
 
+      pwContainer.classList.add("error-shake");
 
-        if (
-            sessionStorage.getItem('gallery_access')
-            === 'true'
-        ) {
+      window.setTimeout(() => {
 
-            passwordScreen.style.display = 'none';
+        pwContainer.classList.remove("error-shake");
 
-        }
+        passwordInput.value = "";
 
+      }, 420);
 
-        // --- 3. Gallery Logic ---
-        // TOTAL IMAGE CAPACITY = 53
+    }
 
-        const images = [];
+  });
 
-        for (let i = 1; i <= 53; i++) {
-            images.push(`img${i}.jpg`);
-        }
 
 
-        let featIdx = 0;
+  passwordInput.addEventListener("keydown", event => {
 
-        const featImg =
-            document.getElementById('featuredImg');
+    if (event.key === "Enter" && passwordInput.value !== correctPassword) {
 
-        const imgBack =
-            document.getElementById('imgBack');
+      pwContainer.classList.remove("error-shake");
 
+      void pwContainer.offsetWidth;
 
-        // Featured image slideshow
-        setInterval(() => {
+      pwContainer.classList.add("error-shake");
 
-            featIdx =
-                (featIdx + 1) % images.length;
+    }
 
-            const nextImgSrc =
-                images[featIdx];
+  });
 
-            if (imgBack) {
-                imgBack.src = nextImgSrc;
-            }
 
-            if (featImg) {
 
-                featImg.style.opacity = 0;
+  // Synchronized to match all 60 gallery items
 
-                setTimeout(() => {
+  const images = Array.from({ length: 60 }, (_, i) => `img${i + 1}.jpg`);
 
-                    featImg.src = nextImgSrc;
+  const featuredImg = document.getElementById("featuredImg");
 
-                    featImg.style.opacity = 1;
+  const imgBack = document.getElementById("imgBack");
 
-                }, 800);
+  const lightbox = document.getElementById("lightbox");
 
-            }
+  const lbImg = document.getElementById("lbImg");
 
-        }, 4500);
+  const downloadLink = document.getElementById("downloadLink");
 
+  const counter = document.getElementById("lbCounter");
 
-        // --- 4. Lightbox ---
+  let featuredIndex = 0;
 
-        function openLightbox(index) {
+  let currentIndex = 0;
 
-            const lb =
-                document.getElementById('lightbox');
+  let slideshowTimer;
 
-            const img =
-                document.getElementById('lbImg');
 
-            const dl =
-                document.getElementById('downloadLink');
 
+  function rotateFeatured() {
 
-            img.src =
-                (index === 0)
-                ? featImg.src
-                : images[index];
+    featuredIndex = (featuredIndex + 1) % images.length;
 
+    const nextSrc = images[featuredIndex];
 
-            dl.href = img.src;
+    if (imgBack) imgBack.src = nextSrc;
 
-            lb.classList.add('active');
+    if (featuredImg) {
 
-        }
+      featuredImg.style.opacity = "0";
 
+      window.setTimeout(() => {
 
-        function closeLightbox() {
+        featuredImg.src = nextSrc;
 
-            document
-                .getElementById('lightbox')
-                .classList.remove('active');
+        featuredImg.style.opacity = "1";
 
-        }
+      }, 450);
 
+    }
 
-        // Escape key closes lightbox
-        document.addEventListener('keydown', (e) => {
+  }
 
-            if (e.key === "Escape") {
-                closeLightbox();
-            }
 
-        });
 
-    </script>
+  function startSlideshow() {
+
+    window.clearInterval(slideshowTimer);
+
+    slideshowTimer = window.setInterval(() => {
+
+      if (!lightbox.classList.contains("active")) rotateFeatured();
+
+    }, 4500);
+
+  }
+
+  startSlideshow();
+
+
+
+  function syncLightbox() {
+
+    const src = currentIndex === 0 ? featuredImg.src : images[currentIndex];
+
+    lbImg.src = src;
+
+    lbImg.alt = `Gallery image ${String(currentIndex + 1).padStart(2, "0")}`;
+
+    downloadLink.href = src;
+
+    downloadLink.download = `biplov-gallery-${String(currentIndex + 1).padStart(2, "0")}.jpg`;
+
+    if (counter) counter.textContent = `${String(currentIndex + 1).padStart(2, "0")} / ${images.length}`;
+
+  }
+
+
+
+  window.openLightbox = function(index) {
+
+    currentIndex = Math.max(0, Math.min(images.length - 1, Number(index) || 0));
+
+    syncLightbox();
+
+    lightbox.classList.add("active");
+
+    lightbox.setAttribute("aria-hidden", "false");
+
+    document.body.style.overflow = "hidden";
+
+  };
+
+
+
+  window.closeLightbox = function() {
+
+    lightbox.classList.remove("active");
+
+    lightbox.setAttribute("aria-hidden", "true");
+
+    document.body.style.overflow = "";
+
+  };
+
+
+
+  function changeImage(direction) {
+
+    currentIndex = (currentIndex + direction + images.length) % images.length;
+
+    syncLightbox();
+
+  }
+
+
+
+  document.getElementById("lbPrev")?.addEventListener("click", () => changeImage(-1));
+
+  document.getElementById("lbNext")?.addEventListener("click", () => changeImage(1));
+
+
+
+  lightbox.addEventListener("click", event => {
+
+    if (event.target === lightbox) window.closeLightbox();
+
+  });
+
+
+
+  document.addEventListener("keydown", event => {
+
+    if (!lightbox.classList.contains("active")) return;
+
+    if (event.key === "Escape") window.closeLightbox();
+
+    if (event.key === "ArrowLeft") changeImage(-1);
+
+    if (event.key === "ArrowRight") changeImage(1);
+
+  });
+
+
+
+  let touchStartX = 0;
+
+  lightbox.addEventListener("touchstart", event => {
+
+    touchStartX = event.changedTouches[0].screenX;
+
+  }, { passive: true });
+
+
+
+  lightbox.addEventListener("touchend", event => {
+
+    const delta = event.changedTouches[0].screenX - touchStartX;
+
+    if (Math.abs(delta) > 55) changeImage(delta < 0 ? 1 : -1);
+
+  }, { passive: true });
+
+
+
+  document.querySelectorAll(".gallery-item").forEach(item => {
+
+    item.setAttribute("role", "button");
+
+    item.setAttribute("tabindex", "0");
+
+    item.setAttribute("aria-label", item.querySelector(".item-title")?.textContent.trim() || "Open gallery image");
+
+    item.addEventListener("keydown", event => {
+
+      if (event.key === "Enter" || event.key === " ") {
+
+        event.preventDefault();
+
+        item.click();
+
+      }
+
+    });
+
+  });
+
+})();
+
+</script>
+
+
+
+
+<script>
+/* Minimal keyboard/context-menu deterrents. These do not affect gallery controls or downloads. */
+document.addEventListener("contextmenu", function (event) {
+  event.preventDefault();
+});
+document.addEventListener("dragstart", function (event) {
+  if (event.target && event.target.tagName === "IMG") event.preventDefault();
+});
+document.addEventListener("keydown", function (event) {
+  var key = (event.key || "").toLowerCase();
+  if (
+    key === "f12" ||
+    (event.ctrlKey && !event.shiftKey && key === "u") ||
+    (event.ctrlKey && event.shiftKey && ["i", "j", "c", "k"].includes(key))
+  ) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+}, true);
+</script>
 
 </body>
+
 </html>
