@@ -1,642 +1,1716 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8" />
+
     <title>Biplov Devkota | Portfolio</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <meta name="description" content="Portfolio of Biplov Devkota" />
 
+
+
     <script>
+
         window.NREUM ||= {};
+
         window.NREUM.init = {
+
             privacy: { cookies_enabled: true },
+
             ajax: { deny_list: [] },
+
             feature_flags: ["soft_nav"],
+
             distributed_tracing: { enabled: true }
+
         };
+
         window.NREUM.info = {
+
             beacon: "bam.nr-data.net",
+
             errorBeacon: "bam.nr-data.net",
+
             licenseKey: "3f776c1fa0",
+
             applicationID: "691068959",
+
             transactionName: "elhfQRdXWQkHFBgOUVpaQhoXXUYKFxRUBkAWUF1BA2dQCAADUw==",
+
             queueTime: 0,
+
             applicationTime: 45,
+
             agent: ""
+
         };
+
         window.NREUM.loader_config = {
+
             agentID: "691069996",
+
             accountID: "404656",
+
             trustKey: "404656",
+
             xpid: "UAYDV1NVGwUJVVFUDwgCXw==",
+
             licenseKey: "3f776c1fa0",
+
             applicationID: "691068959",
+
             browserID: "691069996"
+
         };
+
     </script>
+
     <script src="https://js-agent.newrelic.com/nr-spa-1.310.1.min.js"></script>
 
+
+
     <style>
+
     @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap");
 
+
+
     /* ================= PROTECTION STYLES ================= */
+
     * {
+
         -webkit-user-select: none;
+
         -moz-user-select: none;
+
         -ms-user-select: none;
+
         user-select: none;
+
         -webkit-user-drag: none;
+
     }
+
+
 
     img {
+
         pointer-events: none;
+
     }
+
+
 
     /* ================= ULTRA-CLEAN KINETIC PRELOADER ================= */
+
     #loader-wrapper {
+
         position: fixed;
+
         top: 0; left: 0; width: 100%; height: 100%;
+
         background: #030305;
+
         display: flex; justify-content: center; align-items: center;
+
         z-index: 99999;
+
         transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1), opacity 1s ease, visibility 1.2s;
+
         overflow: hidden;
+
     }
+
+
 
     /* SVG Filter Box Trick for Organic Fluid Merging */
+
     .liquid-portal {
+
         position: absolute;
+
         width: 450px;
+
         height: 450px;
+
         filter: url('#organic-goo');
+
         opacity: 0.35;
+
         pointer-events: none;
+
     }
+
+
 
     .liquid-drop {
+
         position: absolute;
+
         top: 50%; left: 50%;
+
         transform: translate(-50%, -50%);
+
         background: linear-gradient(135deg, #00ffff, #ff0055);
+
         border-radius: 50%;
+
         filter: blur(4px);
+
     }
+
+
 
     .drop-core { width: 140px; height: 140px; animation: morphBlob 8s ease-in-out infinite alternate; }
+
     .drop-satellite-1 { width: 60px; height: 60px; animation: orbitBlob1 6s infinite linear; }
+
     .drop-satellite-2 { width: 45px; height: 45px; animation: orbitBlob2 4s infinite linear; }
 
+
+
     /* Elegant Kinetic Text Component */
+
     .kinetic-container {
+
         position: relative;
+
         z-index: 5;
+
         display: flex;
+
         flex-direction: column;
+
         align-items: center;
+
     }
+
+
 
     .clean-name-loader {
+
         font-family: "Orbitron", sans-serif;
+
         font-size: 3.2rem;
+
         font-weight: 900;
+
         color: #ffffff;
+
         text-transform: uppercase;
+
         letter-spacing: 35px;
+
         margin-left: 35px; /* Centers text offsets caused by tracking */
+
         position: relative;
+
         animation: premiumStretch 4.5s cubic-bezier(0.25, 1, 0.5, 1) infinite alternate;
+
         text-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+
     }
+
+
 
     .clean-line-pulse {
+
         width: 40px;
+
         height: 1px;
+
         background: rgba(255, 255, 255, 0.25);
+
         margin-top: 10px;
+
         position: relative;
+
         animation: expandLine 2.2s cubic-bezier(0.76, 0, 0.24, 1) infinite alternate;
+
     }
+
+
 
     /* PRELOADER KEYFRAMES */
+
     @keyframes premiumStretch {
+
         0% { letter-spacing: 12px; margin-left: 12px; opacity: 0.4; filter: blur(3px); }
+
         35% { opacity: 1; filter: blur(0px); }
+
         100% { letter-spacing: 38px; margin-left: 38px; }
+
     }
+
+
 
     @keyframes expandLine {
+
         0% { width: 0px; background: rgba(0, 255, 255, 0.2); }
+
         100% { width: 180px; background: rgba(255, 255, 255, 0.7); box-shadow: 0 0 10px rgba(0,255,255,0.3); }
+
     }
+
+
 
     @keyframes morphBlob {
+
         0% { border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+
         50% { border-radius: 70% 30% 52% 48% / 60% 40% 60% 40%; transform: translate(-50%, -50%) rotate(180deg) scale(1.2); }
+
         100% { border-radius: 30% 70% 40% 60% / 50% 60% 40% 50%; transform: translate(-50%, -50%) rotate(360deg) scale(0.95); }
+
     }
+
+
 
     @keyframes orbitBlob1 {
+
         0% { transform: translate(-50%, -50%) rotate(0deg) translateX(110px) rotate(0deg); }
+
         100% { transform: translate(-50%, -50%) rotate(360deg) translateX(110px) rotate(-360deg); }
+
     }
 
+
+
     @keyframes orbitBlob2 {
+
         0% { transform: translate(-50%, -50%) rotate(360deg) translateX(80px) rotate(-360deg); }
+
         100% { transform: translate(-50%, -50%) rotate(0deg) translateX(80px) rotate(0deg); }
+
     }
+
+
 
     .loader-hidden { transform: translateY(-100%); opacity: 0; visibility: hidden; }
 
+
+
     /* ================= BASE STYLES ================= */
+
     body {
+
         margin: 0; padding: 0;
+
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
         background: url('bg.jpg') no-repeat center center fixed;
+
         background-size: cover;
+
         color: #fff;
+
         overflow-x: hidden;
+
     }
+
     body::before {
+
         content: "";
+
         position: fixed;
+
         top: 0; left: 0; width: 100%; height: 100%;
+
         background: rgba(2, 2, 4, 0.75);
+
         z-index: -1;
+
     }
+
+
 
     .glass-panel {
+
         background: rgba(255, 255, 255, 0.03);
+
         backdrop-filter: blur(20px) saturate(180%);
+
         -webkit-backdrop-filter: blur(20px) saturate(180%);
+
         border: 1px solid rgba(255, 255, 255, 0.08);
+
         border-radius: 24px;
+
         box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+
         margin-bottom: 25px;
+
         width: 90%;
+
         max-width: 1000px;
+
     }
+
+
 
     .liquid-text { font-family: "Orbitron", sans-serif; color: white; text-shadow: 0 0 8px rgba(255,255,255,0.3); }
+
     .fade-in-up { opacity: 0; transform: translateY(40px); transition: 1.2s cubic-bezier(0.215, 0.610, 0.355, 1); }
+
     .fade-in-up.visible { opacity: 1; transform: translateY(0); }
 
+
+
     /* ================= ACCURATE INTEREST TAG WRAPPERS ================= */
+
     .tag-wrapper {
+
         position: relative;
+
         display: inline-block;
+
     }
+
+
 
     /* Precision Matched Image Capsule Layout */
+
     .tag-image-capsule {
+
         position: absolute;
+
         bottom: 135%;
+
         left: 50%;
+
         transform: translateX(-50%) scale(0.85);
+
         width: 110px;
+
         height: 65px;
+
         border-radius: 12px;
+
         border: 1px solid rgba(255, 255, 255, 0.15);
+
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 255, 255, 0.1);
+
         overflow: hidden;
+
         opacity: 0;
+
         pointer-events: none;
+
         transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
         z-index: 10;
+
         background: #050508;
+
     }
+
+
 
     .tag-image-capsule img {
+
         width: 100%;
+
         height: 100%;
+
         object-fit: cover;
+
         display: block;
+
     }
+
+
 
     /* Balanced Alignment Triangle Hint */
+
     .tag-image-capsule::after {
+
         content: '';
+
         position: absolute;
+
         bottom: -5px;
+
         left: 50%;
+
         transform: translateX(-50%) rotate(45deg);
+
         width: 10px;
+
         height: 10px;
+
         background: #050508;
+
         border-right: 1px solid rgba(255, 255, 255, 0.15);
+
         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
     }
+
+
 
     .tag-wrapper:hover .tag-image-capsule {
+
         opacity: 1;
+
         transform: translateX(-50%) scale(1);
+
     }
+
+
 
     .interest-tag { 
+
         background: rgba(255,255,255,0.04); 
+
         padding: 12px 20px; 
+
         border-radius: 15px; 
+
         font-size: 11px; 
+
         border: 1px solid rgba(255,255,255,0.06); 
+
         font-family: "Orbitron"; 
+
         letter-spacing: 1.5px;
+
         cursor: pointer;
+
         transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
         position: relative;
+
         overflow: hidden;
+
         min-width: 80px;
+
         text-align: center;
+
     }
+
+
 
     .interest-tag .hover-text {
+
         position: absolute;
+
         top: 100%; left: 0; width: 100%; height: 100%;
+
         background: #fff; color: #000;
+
         display: flex; align-items: center; justify-content: center;
+
         transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
         font-weight: bold;
+
         font-size: 9px;
+
         padding: 0 5px;
+
     }
+
+
 
     .interest-tag:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.6); box-shadow: 0 5px 15px rgba(255,255,255,0.1); }
+
     .interest-tag:hover .default-text { opacity: 0; transform: translateY(-20px); }
+
     .interest-tag:hover .hover-text { top: 0; }
 
+
+
     .baby-blue-tag {
+
         background: rgba(0, 255, 255, 0.08) !important;
+
         border-color: rgba(0, 255, 255, 0.2) !important;
+
         color: #00ffff !important;
+
     }
+
     .baby-blue-tag .hover-text { background: #00ffff !important; color: #000 !important; }
 
+
+
     /* ================= MODALS & LIGHTBOX ================= */
+
     #lightbox, #model-modal { 
+
         position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+
         background: rgba(2,2,4,0.96); backdrop-filter: blur(30px); 
+
         display: none; justify-content: center; align-items: center; z-index: 10000; 
+
     }
+
     #lightbox.active, #model-modal.active { display: flex; }
+
     #lightbox img { max-width: 85%; max-height: 75%; border-radius: 12px; }
 
+
+
     .sketchfab-embed-wrapper { width: 90%; max-width: 800px; height: 500px; border-radius: 20px; overflow: hidden; background: #000; }
+
     .sketchfab-embed-wrapper iframe { width: 100%; height: 100%; }
+
+
 
     .close-btn { position:absolute; top:20px; right:20px; background:none; border:none; color:#fff; font-size:30px; cursor:pointer; z-index: 10001; }
 
+
+
     /* ================= SOCIALS & HEADER ================= */
+
     .social-capsule {
+
         position: fixed; left: 20px; top: 50%; transform: translateY(-50%);
+
         display: flex; flex-direction: column; gap: 18px; padding: 22px 10px;
+
         background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px);
+
         border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 40px; z-index: 999;
+
     }
+
     .social-link { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s; }
+
     .social-link svg { width: 18px; height: 18px; fill: rgba(255,255,255,0.4); }
+
     .social-link:hover { background: rgba(255,255,255,0.08); transform: scale(1.1); }
+
     .social-link:hover svg { fill: #00ffff; }
 
+
+
     .slider-container { position: relative; width: 90%; max-width: 1000px; aspect-ratio: 16 / 9; margin: 0 auto 25px; overflow: hidden; border-radius: 24px; }
+
     #mainSlider { width: 100%; height: 100%; background-size: cover; background-position: center; transition: background-image 0.8s; cursor: zoom-in; pointer-events: auto !important; }
 
+
+
     .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; margin-top: 20px; }
-    
+
+
+
     /* Unique Cyber Navigation Hover Suite */
+
     .nav-links ul { list-style: none; display: flex; gap: 25px; padding-left: 0; margin: 0; }
+
     .nav-links li { position: relative; padding: 6px 0; }
-    
+
+
+
     .nav-links a { 
+
         text-decoration: none; 
+
         font-size: 11px; 
+
         letter-spacing: 2px; 
+
         color: white; 
+
         opacity: 0.6; 
+
         font-family: 'Orbitron'; 
+
         transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
         display: inline-block;
+
         position: relative;
+
     }
+
+
 
     /* Laser Tracker Underline System */
+
     .nav-links li::after {
+
         content: '';
+
         position: absolute;
+
         bottom: 0;
+
         left: 50%;
+
         width: 0;
+
         height: 1px;
+
         background: #00ffff;
+
         box-shadow: 0 0 8px #00ffff, 0 0 2px #00ffff;
+
         transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
         transform: translateX(-50%);
+
     }
+
+
 
     /* Hover States triggering Glitch Shadow and Laser Base Expansion */
+
     .nav-links li:hover a { 
+
         opacity: 1; 
+
         color: #fff;
+
         letter-spacing: 4px;
+
         text-shadow: -1.5px 0 #00ffff, 1.5px 0 #ff0055;
+
     }
-    
+
+
+
     .nav-links li:hover::after {
+
         width: 100%;
+
     }
+
+
 
     .bio-details {
+
         font-family: 'Orbitron', sans-serif;
+
         font-size: 13px;
+
         letter-spacing: 1.5px;
+
         line-height: 1.8;
+
     }
+
+
 
     .live-age-counter {
+
         font-family: 'Orbitron', sans-serif;
+
         font-weight: bold;
+
         letter-spacing: 1px;
+
     }
+
+
 
     @media (max-width: 768px) { 
+
         .social-capsule { display: none; }
+
         .sketchfab-embed-wrapper { height: 350px; }
+
         .clean-name-loader { font-size: 2rem; letter-spacing: 16px; margin-left: 16px; }
+
     }
-    </style>
+
+
+
+
+
+    /* ================= LIQUID GLASS DESIGN UPGRADE ================= */
+
+    :root {
+
+        color-scheme: dark;
+
+        --glass-bg: rgba(255,255,255,.055);
+
+        --glass-line: rgba(255,255,255,.15);
+
+        --cyan: #8beaff;
+
+        --blue: #7aa7ff;
+
+        --pink: #ff8bd7;
+
+        --ease-out: cubic-bezier(.2,.8,.2,1);
+
+    }
+
+    html { scroll-behavior: smooth; scrollbar-color: rgba(139,234,255,.5) rgba(255,255,255,.04); }
+
+    body {
+
+        min-height: 100vh;
+
+        background-color: #05070d;
+
+        background-image:
+
+            radial-gradient(ellipse at 12% 8%, rgba(41,130,255,.18), transparent 34%),
+
+            radial-gradient(ellipse at 88% 30%, rgba(170,91,255,.13), transparent 32%),
+
+            url('bg.jpg');
+
+        background-size: auto, auto, cover;
+
+        background-attachment: fixed;
+
+        background-position: center;
+
+    }
+
+    body::before {
+
+        background:
+
+            linear-gradient(135deg, rgba(3,7,17,.80), rgba(4,8,20,.62)),
+
+            radial-gradient(ellipse at 50% 0%, rgba(93,205,255,.08), transparent 60%);
+
+        z-index: -1;
+
+    }
+
+    body::after {
+
+        content: "";
+
+        position: fixed; inset: 0; pointer-events: none; z-index: -1;
+
+        opacity: .15;
+
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+
+    }
+
+    ::selection { background: rgba(139,234,255,.3); color: white; }
+
+    .glass-panel {
+
+        position: relative;
+
+        isolation: isolate;
+
+        background: linear-gradient(135deg, rgba(255,255,255,.085), rgba(255,255,255,.025) 55%, rgba(139,234,255,.035));
+
+        border: 1px solid rgba(255,255,255,.13);
+
+        border-top-color: rgba(255,255,255,.24);
+
+        border-radius: 26px;
+
+        box-shadow: 0 22px 60px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.07);
+
+        backdrop-filter: blur(26px) saturate(155%);
+
+        -webkit-backdrop-filter: blur(26px) saturate(155%);
+
+        overflow: hidden;
+
+        transition: border-color .35s ease, box-shadow .35s ease, transform .35s var(--ease-out);
+
+    }
+
+    .glass-panel::before {
+
+        content: ""; position: absolute; inset: 0; pointer-events: none; z-index: -1;
+
+        background: linear-gradient(115deg, rgba(255,255,255,.10), transparent 24%, transparent 68%, rgba(139,234,255,.045));
+
+        opacity: .75;
+
+    }
+
+    .glass-panel:hover {
+
+        border-color: rgba(139,234,255,.24);
+
+        box-shadow: 0 26px 70px rgba(0,0,0,.34), 0 0 35px rgba(75,184,255,.055), inset 0 1px 0 rgba(255,255,255,.10);
+
+    }
+
+    .liquid-text {
+
+        color: #f7fbff;
+
+        text-shadow: 0 0 22px rgba(139,234,255,.13);
+
+        letter-spacing: .04em;
+
+    }
+
+    .header {
+
+        min-height: 64px;
+
+        padding: 14px 26px;
+
+        margin: 22px auto 26px;
+
+        box-sizing: border-box;
+
+    }
+
+    .logo {
+
+        display: grid; place-items: center;
+
+        width: 38px; height: 38px; border-radius: 13px;
+
+        background: linear-gradient(145deg, rgba(139,234,255,.19), rgba(122,167,255,.06));
+
+        border: 1px solid rgba(139,234,255,.22);
+
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 0 24px rgba(139,234,255,.08);
+
+        font-size: 19px;
+
+    }
+
+    .nav-links ul { gap: clamp(14px, 3vw, 30px); }
+
+    .nav-links a { font-size: 10px; letter-spacing: 1.7px; opacity: .72; }
+
+    .nav-links li:hover a { color: var(--cyan); letter-spacing: 2px; text-shadow: 0 0 18px rgba(139,234,255,.42); }
+
+    .nav-links li::after { background: linear-gradient(90deg, var(--blue), var(--cyan)); height: 2px; border-radius: 4px; }
+
+    .social-capsule {
+
+        padding: 12px 8px; gap: 12px;
+
+        background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.025));
+
+        border: 1px solid rgba(255,255,255,.14);
+
+        box-shadow: 0 18px 50px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.1);
+
+        backdrop-filter: blur(26px) saturate(160%);
+
+        -webkit-backdrop-filter: blur(26px) saturate(160%);
+
+    }
+
+    .social-link { border: 1px solid transparent; }
+
+    .social-link svg { fill: rgba(240,249,255,.68); transition: fill .25s ease; }
+
+    .social-link:hover { background: rgba(139,234,255,.12); border-color: rgba(139,234,255,.18); box-shadow: 0 0 20px rgba(139,234,255,.09); }
+
+    .social-link:hover svg { fill: var(--cyan); }
+
+    #main-content > .glass-panel { padding: clamp(22px, 4vw, 34px) !important; }
+
+    #main-content > .glass-panel:first-of-type { margin-top: 0; }
+
+    #main-content h2 { font-size: clamp(25px, 4vw, 34px) !important; letter-spacing: -.02em; }
+
+    .bio-details { color: rgba(239,247,255,.77); font-size: 11px; line-height: 2.15; letter-spacing: 1.15px; }
+
+    .live-age-counter { color: var(--cyan); font-size: 12px !important; text-shadow: 0 0 18px rgba(139,234,255,.18); }
+
+    .slider-container {
+
+        border: 1px solid rgba(255,255,255,.17);
+
+        box-shadow: 0 25px 70px rgba(0,0,0,.36), inset 0 1px 0 rgba(255,255,255,.15);
+
+        background: rgba(255,255,255,.04);
+
+    }
+
+    #mainSlider { position: relative; background-color: #101521; background-size: cover; background-position: center; }
+
+    #mainSlider::after {
+
+        content: ""; position: absolute; inset: 0;
+
+        background: linear-gradient(180deg, transparent 40%, rgba(2,5,12,.58));
+
+        pointer-events: none;
+
+    }
+
+    #projectTitle { position: relative; z-index: 1; font-size: 13px !important; letter-spacing: 3px; text-shadow: 0 2px 18px #000; }
+
+    .tag-wrapper { margin-bottom: 5px; }
+
+    .tag-image-capsule {
+
+        border-radius: 15px; border-color: rgba(255,255,255,.23);
+
+        box-shadow: 0 18px 38px rgba(0,0,0,.4), 0 0 24px rgba(139,234,255,.09);
+
+        backdrop-filter: blur(12px);
+
+    }
+
+    .tag-image-capsule::after { background: #0b111b; }
+
+    .interest-tag {
+
+        display: flex; align-items: center; justify-content: center;
+
+        min-height: 44px; min-width: 105px; box-sizing: border-box;
+
+        padding: 12px 17px;
+
+        background: linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,.025));
+
+        border: 1px solid rgba(255,255,255,.13);
+
+        border-radius: 14px;
+
+        color: rgba(246,251,255,.9);
+
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+
+        font-size: 10px; letter-spacing: 1.3px;
+
+    }
+
+    .interest-tag:hover {
+
+        transform: translateY(-3px);
+
+        border-color: rgba(139,234,255,.42);
+
+        box-shadow: 0 12px 28px rgba(0,0,0,.22), 0 0 24px rgba(139,234,255,.08);
+
+    }
+
+    .interest-tag .hover-text {
+
+        background: linear-gradient(135deg, #dff9ff, #9ddcff);
+
+        color: #07111b;
+
+        border-radius: 12px;
+
+        font-size: 9px;
+
+    }
+
+    .baby-blue-tag { background: linear-gradient(135deg, rgba(139,234,255,.16), rgba(122,167,255,.07)) !important; border-color: rgba(139,234,255,.28) !important; color: var(--cyan) !important; }
+
+    .baby-blue-tag .hover-text { background: linear-gradient(135deg, #dff9ff, #9ddcff) !important; color: #07111b !important; }
+
+    .tag-image-capsule img { pointer-events: none; }
+
+    #lightbox, #model-modal {
+
+        padding: 24px; box-sizing: border-box;
+
+        background: rgba(3,6,13,.78);
+
+        backdrop-filter: blur(32px) saturate(130%);
+
+        -webkit-backdrop-filter: blur(32px) saturate(130%);
+
+    }
+
+    #lightbox img {
+
+        max-width: min(88vw, 1100px); max-height: 78vh;
+
+        object-fit: contain; border-radius: 20px;
+
+        border: 1px solid rgba(255,255,255,.18);
+
+        box-shadow: 0 30px 90px rgba(0,0,0,.55), 0 0 45px rgba(139,234,255,.07);
+
+        animation: modalPop .28s var(--ease-out);
+
+        pointer-events: auto;
+
+    }
+
+    .close-btn {
+
+        width: 46px; height: 46px; top: 24px; right: 24px;
+
+        border-radius: 50%; color: #f6fbff;
+
+        background: rgba(255,255,255,.09);
+
+        border: 1px solid rgba(255,255,255,.18);
+
+        backdrop-filter: blur(18px);
+
+        transition: transform .25s ease, *background* .25s ease;
+
+    }
+
+    .close-btn:hover { transform: rotate(90deg); background: rgba(139,234,255,.16); }
+
+    .sketchfab-embed-wrapper {
+
+        max-width: 900px; height: min(70vh, 600px);
+
+        border: 1px solid rgba(255,255,255,.17);
+
+        box-shadow: 0 30px 90px rgba(0,0,0,.45);
+
+    }
+
+    #loader-wrapper {
+
+        background:
+
+            radial-gradient(ellipse at 50% 45%, rgba(24,71,112,.23), transparent 35%),
+
+            #03050a;
+
+    }
+
+    .liquid-portal { opacity: .48; }
+
+    .liquid-drop { background: linear-gradient(135deg, #8beaff, #728dff 52%, #ff8bd7); }
+
+    .clean-name-loader { text-shadow: 0 0 34px rgba(139,234,255,.22); }
+
+    .clean-line-pulse { background: rgba(139,234,255,.4); }
+
+    #main-content { width: 100%; box-sizing: border-box; }
+
+    #main-content > .glass-panel:last-child { margin-top: 0; }
+
+    #main-content > .glass-panel:last-child a { color: var(--cyan) !important; transition: opacity .25s ease; }
+
+    #main-content > .glass-panel:last-child a:hover { opacity: 1 !important; }
+
+    @keyframes modalPop { from { opacity: 0; transform: scale(.97) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+
+    @media (max-width: 768px) {
+
+        .social-capsule { display: flex; position: static; transform: none; flex-direction: row; justify-content: center; width: max-content; max-width: calc(100% - 36px); margin: 0 auto 18px; padding: 7px 10px; gap: 8px; }
+
+        .social-link { width: 34px; height: 34px; }
+
+        .header { width: 92%; margin-top: 14px; padding: 12px 16px; gap: 12px; }
+
+        .nav-links ul { gap: 13px; }
+
+        .nav-links a { font-size: 9px; letter-spacing: 1px; }
+
+        .logo { width: 34px; height: 34px; }
+
+        .glass-panel { border-radius: 21px; }
+
+        .slider-container { width: 92%; border-radius: 21px; }
+
+        .bio-details { font-size: 10px; }
+
+        .interest-tag { min-width: 95px; padding: 10px 12px; font-size: 9px; }
+
+        .sketchfab-embed-wrapper { height: 55vh; min-height: 300px; }
+
+        #main-content > .glass-panel:last-child { flex-wrap: wrap; gap: 12px; }
+
+        #main-content > .glass-panel:last-child a { overflow-wrap: anywhere; }
+
+    }
+
+    @media (max-width: 420px) {
+
+        .header { align-items: center; }
+
+        .nav-links ul { gap: 10px; }
+
+        .nav-links a { font-size: 8px; letter-spacing: .6px; }
+
+        .clean-name-loader { font-size: 1.65rem; letter-spacing: 10px; margin-left: 10px; }
+
+        .bio-details { letter-spacing: .7px; }
+
+        #main-content > .glass-panel { padding: 20px !important; }
+
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+        *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+
+    }
+
+
+
+    
+/* Best-effort browser-inspection deterrents (not a security boundary). */
+html, body, body * {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none;
+}
+input, textarea, select, [contenteditable="true"], .allow-select {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+img, svg { -webkit-user-drag: none; }
+
+</style>
+
 </head>
+
 <body> 
 
+
+
 <!-- SVG MATRIX ENGINE (Hides organically, provides fluid filtering logic) -->
+
 <svg style="position: absolute; width: 0; height: 0;">
+
     <defs>
+
         <filter id="organic-goo">
+
             <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur" />
+
             <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9" result="goo" />
+
             <feBlend in="SourceGraphic" in2="goo" />
+
         </filter>
+
     </defs>
+
 </svg>
 
+
+
 <!-- PREMIUM MINIMALIST HOVER PORTAL PRELOADER -->
+
 <div id="loader-wrapper">
+
     <div class="liquid-portal">
+
         <div class="liquid-drop drop-core"></div>
+
         <div class="liquid-drop drop-satellite-1"></div>
+
         <div class="liquid-drop drop-satellite-2"></div>
+
     </div>
+
     <div class="kinetic-container">
+
         <div class="clean-name-loader">BIPLOV</div>
+
         <div class="clean-line-pulse"></div>
+
     </div>
+
 </div>
+
+
 
 <div class="social-capsule">
-    <a href="https://github.com/MoonBiplov" target="_blank" class="social-link" title="GitHub">
+
+    <a href="https://github.com/MoonBiplov" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
+
         <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 4.243 2.752 7.841 6.571 9.111.6.111.82-.261.82-.577 0-.285-.011-1.04-.015-2.04-2.67.58-3.233-1.287-3.233-1.287-.436-1.107-1.064-1.402-1.064-1.402-.87-.595.066-.583.066-.583.963.068 1.47 0.989 1.47 0.989.855 1.464 2.246 1.041 2.792.796.087-.62.335-1.041.61-1.281-2.131-.242-4.371-1.065-4.371-4.742 0-1.048.374-1.905.987-2.576-.099-.243-.427-1.218.094-2.538 0 0 .806-.258 2.64 0.984.765-.213 1.586-.319 2.401-.323.815.004 1.636.11 2.401.323 1.832-1.242 2.637-.984 2.637-.984.522 1.32.194 2.295.095 2.538.614.671.986 1.528.986 2.576 0 3.686-2.243 4.498-4.381 4.735.344.296.65.882.65 1.777 0 1.283-.012 2.318-.012 2.633 0 .319.217.693.825.576 3.817-1.272 6.565-4.87 6.565-9.109 0-6.627-5.373-12-12-12z"/></svg>
+
     </a>
-    <a href="https://www.instagram.com/moonbiplov/" target="_blank" class="social-link" title="Instagram">
+
+    <a href="https://www.instagram.com/notyoutoo.x?utm_source=qr" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">
+
         <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.266.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.848 0-3.204 0.12-3.584.07-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4zm6.406-11.845c.796 0 1.441.645 1.441 1.44s-.645 1.44-1.441 1.44-1.44-.645-1.44-1.44.645-1.44 1.44-1.44z"/></svg>
+
     </a>
+
 </div>
+
+
 
 <div id="lightbox">
+
     <button class="close-btn" onclick="closeLightbox()">✕</button>
+
     <img id="lightboxImg" src="" alt="Lightbox image" />
+
 </div>
+
+
 
 <div class="container fade-in-up" id="main-content"
+
      style="display:flex; flex-direction:column; align-items:center; padding-bottom: 80px;">
-    
+
+
+
     <header class="header glass-panel">
+
         <div class="logo liquid-text" style="font-weight: bold; letter-spacing: 2px;">X</div>
+
         <nav class="nav-links">
+
             <ul>
+
                 <li><a href="index.html">HOME</a></li>
+
                 <li><a href="gallery.html">GALLERY</a></li>
+
                 <li><a href="links.html">LINKS</a></li>
+
             </ul>
+
         </nav>
+
     </header>
 
+
+
     <div class="glass-panel" style="padding: 25px 30px;"> 
+
         <h2 class="liquid-text" style="font-size: 28px; margin:0;">ME:</h2>
+
         <div style="margin-top:8px; opacity:0.8;">
+
             <div id="live-age" class="live-age-counter" style="font-size: 14px;">LOADING SYSTEM...</div>
-            
+
+
+
             <div class="bio-details" style="margin-top: 15px;">
+
                 <div>NAME: Biplov Devkota</div>
+
                 <div>DOB: 3rd June 2009</div>
+
                 <div>ADDRESS: Gorkha, Nepal</div>
+
             </div>
+
         </div>
+
     </div>
+
+
 
     <div id="gallery" class="slider-container glass-panel">
+
         <div id="mainSlider" onclick="openLightbox()"></div>
+
         <div style="position:absolute; bottom:20px; left:30px; pointer-events: none;">
+
             <div id="projectTitle" class="liquid-text" style="font-size: 20px;">COLLECTION</div>
+
         </div>
+
     </div>
+
+
 
     <div class="glass-panel" style="padding: 25px 30px;">
+
         <div class="liquid-text" style="font-size: 14px; letter-spacing: 3px; margin-bottom: 25px;">// THINGS I LIKE</div>
+
         <div style="display:flex; gap:15px; flex-wrap:wrap; margin-top: 45px;">
-            
+
+
+
             <!-- Music Tag Wrapper -->
+
             <div class="tag-wrapper">
+
                 <div class="tag-image-capsule">
+
                     <img src="drake.jpg" alt="Drake Preview">
+
                 </div>
+
                 <div class="interest-tag">
+
                     <span class="default-text">MUSIC</span>
+
                     <span class="hover-text">DRAKE 🦉</span>
+
                 </div>
+
             </div>
+
+
 
             <!-- Gaming Tag Wrapper -->
+
             <div class="tag-wrapper">
+
                 <div class="tag-image-capsule">
+
                     <img src="gaming.jpg" alt="Gaming Preview">
+
                 </div>
+
                 <div class="interest-tag">
+
                     <span class="default-text">GAMING</span>
+
                     <span class="hover-text" style="font-size: 7px;">MC, GTA V, PUBGM</span>
+
                 </div>
+
             </div>
+
+
 
             <!-- Cars Tag Wrapper -->
+
             <div class="tag-wrapper">
+
                 <div class="tag-image-capsule">
+
                     <img src="cars.jpg" alt="Cars Preview">
+
                 </div>
+
                 <div class="interest-tag" onclick="openModel()">
+
                     <span class="default-text">CARS</span>
+
                     <span class="hover-text">BMW M4 & Porsche 911 GT3RS</span>
+
                 </div>
+
             </div>
+
+
 
             <!-- Astro Tag Wrapper -->
+
             <div class="tag-wrapper">
+
                 <div class="tag-image-capsule">
+
                     <img src="astro.jpg" alt="Astro Preview">
+
                 </div>
+
                 <div class="interest-tag">
+
                     <span class="default-text">ASTRO 🌌</span>
+
                     <span class="hover-text">MOON</span>
+
                 </div>
+
             </div>
+
+
 
             <!-- Fav Colour Tag Wrapper -->
+
             <div class="tag-wrapper">
+
                 <div class="tag-image-capsule">
+
                     <img src="blue.jpg" alt="Colour Preview">
+
                 </div>
+
                 <div class="interest-tag baby-blue-tag">
+
                     <span class="default-text">FAV.COLOUR</span>
+
                     <span class="hover-text">BABY BLUE</span>
+
                 </div>
+
             </div>
 
+
+
         </div>
+
     </div>
+
+
 
     <div class="glass-panel" style="padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));">
-        <div style="font-family: 'Orbitron'; font-size: 14px; color: #fff;">Chasing the Moon 🌙</div>
-        <a href="mailto:biplovmoon@gmail.com" style="color: #fff; text-decoration: none; font-size: 12px; opacity: 0.6;">biplovmoon@gmail.com</a>
+
+        <div style="font-family: 'Orbitron'; font-size: 14px; color: #fff;">NOTYOUTOO.X</div>
+
+        <a href="mailto:notyoutoo.x@gmail.com" style="color: #fff; text-decoration: none; font-size: 12px; opacity: 0.6;">notyoutoo.x@gmail.com</a>
+
     </div>
+
 </div>
 
+
+
 <script>
-// --- 1. Enhanced Anti-DevTools Anti-Tamper Logic ---
-(function() {
-    // Block right click context menu cleanly
-    document.addEventListener('contextmenu', event => event.preventDefault());
 
-    // Block common shortcut key combinations comprehensively
-    document.addEventListener('keydown', function(e) {
-        if (
-            e.keyCode === 123 || // F12
-            (e.ctrlKey && e.shiftKey && e.keyCode === 73) || // Ctrl+Shift+I
-            (e.ctrlKey && e.shiftKey && e.keyCode === 74) || // Ctrl+Shift+J
-            (e.ctrlKey && e.shiftKey && e.keyCode === 67) || // Ctrl+Shift+C
-            (e.ctrlKey && e.keyCode === 85) // Ctrl+U (View Source)
-        ) {
-            e.preventDefault();
-            return false;
-        }
-    });
+// Keep the browser responsive: avoid aggressive debugger traps and shortcut blocking.
 
-    // Infinite debugger execution trap to stall open DevTools panels
-    function devToolsTrap() {
-        function trap(i) {
-            if (("" + i / i).length !== 1 || i % 20 === 0) {
-                (function() {}).constructor("debugger")();
-            } else {
-                (function() {}).constructor("debugger")();
-            }
-            trap(++i);
-        }
-        try {
-            trap(0);
-        } catch (e) {}
-    }
 
-    // Repeated execution to loop endlessly if panel states are active
-    setInterval(devToolsTrap, 50);
-})();
 
 // --- 2. Portfolio Functional Logic ---
+
 document.addEventListener("DOMContentLoaded", () => {
+
     setTimeout(() => {
+
         document.getElementById("loader-wrapper").classList.add("loader-hidden");
+
         setTimeout(() => document.getElementById("main-content").classList.add("visible"), 300);
+
     }, 2800); 
+
 });
 
+
+
 // Accurate Real-Time Live Age Ticker Script (DOB: June 3, 2009)
+
 const birthDate = new Date("2009-06-03T00:00:00");
 
+
+
 function updateLiveAge() {
+
     const now = new Date();
-    
+
+
+
     let years = now.getFullYear() - birthDate.getFullYear();
+
     let birthMonth = birthDate.getMonth();
+
     let currentMonth = now.getMonth();
-    
+
+
+
     if (currentMonth < birthMonth || (currentMonth === birthMonth && now.getDate() < birthDate.getDate())) {
+
         years--;
+
     }
-    
+
+
+
     let lastBirthday = new Date(birthDate);
+
     lastBirthday.setFullYear(birthDate.getFullYear() + years);
-    
+
+
+
     let msDifference = now.getTime() - lastBirthday.getTime();
-    
+
+
+
     const msInDay = 24 * 60 * 60 * 1000;
+
     const msInHour = 60 * 60 * 1000;
+
     const msInMin = 60 * 1000;
+
     const msInSec = 1000;
-    
+
+
+
     let days = Math.floor(msDifference / msInDay);
+
     msDifference %= msInDay;
-    
+
+
+
     let hours = Math.floor(msDifference / msInHour);
+
     msDifference %= msInHour;
-    
+
+
+
     let minutes = Math.floor(msDifference / msInMin);
+
     msDifference %= msInMin;
-    
+
+
+
     let seconds = Math.floor(msDifference / msInSec);
+
     let milliseconds = msDifference % msInSec;
-    
+
+
+
     let padHrs = String(hours).padStart(2, '0');
+
     let padMins = String(minutes).padStart(2, '0');
+
     let padSecs = String(seconds).padStart(2, '0');
+
     let padMs = String(milliseconds).padStart(3, '0');
-    
+
+
+
     document.getElementById("live-age").innerHTML = 
+
         `${years} YEARS ${days} DAYS • ${padHrs}H ${padMins}M ${padSecs}S <span style="font-size:11px; opacity:0.6;">${padMs}</span> • OLD CREATOR`;
-    
+
+
+
     requestAnimationFrame(updateLiveAge);
+
 }
+
+
 
 requestAnimationFrame(updateLiveAge);
 
+
+
 // Slider Gallery Logic
+
 const projects = [
+
     { img: "q1.jpg", title: "" },
+
     { img: "q2.jpg", title: "" },
+
     { img: "q3.jpg", title: "" }
+
 ];
+
 let currentIndex = 0;
+
 const sliderEl = document.getElementById("mainSlider");
 
+
+
 function updateUI() {
+
     sliderEl.style.backgroundImage = `url('${projects[currentIndex].img}')`;
+
     document.getElementById("projectTitle").innerText = projects[currentIndex].title;
+
 }
+
+
 
 setInterval(() => {
+
     currentIndex = (currentIndex + 1) % projects.length;
+
     updateUI();
+
 }, 3000);
 
+
+
 // Modal Controls
+
 function openLightbox() {
+
     document.getElementById("lightbox").classList.add("active");
+
     document.getElementById("lightboxImg").src = projects[currentIndex].img;
+
 }
+
 function closeLightbox() {
+
     document.getElementById("lightbox").classList.remove("active");
+
 }
+
+document.addEventListener("keydown", (event) => {
+
+    if (event.key === "Escape") {
+
+        closeLightbox();
+
+        closeModel();
+
+    }
+
+});
+
+
 
 function openModel() {
+
     document.getElementById("model-modal").classList.add("active");
+
 }
+
 function closeModel() {
+
     document.getElementById("model-modal").classList.remove("active");
+
 }
+
+
 
 updateUI();
+
 </script>
 
+
+
+
+
+<!-- ================= LIQUID GLASS CAR MODEL MODAL ================= -->
+
+<div id="model-modal" role="dialog" aria-modal="true" aria-label="Car model viewer">
+
+    <button class="close-btn" onclick="closeModel()" aria-label="Close car model viewer">✕</button>
+
+    <div class="sketchfab-embed-wrapper">
+
+        <iframe title="3D car model viewer" src="https://sketchfab.com/models/7w7pAfrM3sL/embed"
+
+            frameborder="0" allow="autoplay; fullscreen; xr-spatial-tracking"
+
+            allowfullscreen loading="lazy"></iframe>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* Best-effort shortcut/context-menu deterrents.
+   These cannot prevent source access through browser tools, network requests, or saved files. */
+(() => {
+  "use strict";
+
+  const blocked = (event) => {
+    const key = (event.key || "").toLowerCase();
+    const mod = event.ctrlKey || event.metaKey;
+    const devtoolsShortcut =
+      event.key === "F12" ||
+      (mod && event.shiftKey && ["i", "j", "c"].includes(key)) ||
+      (mod && key === "u") ||
+      (mod && event.shiftKey && key === "k");
+
+    if (devtoolsShortcut) {
+      event.preventDefault();
+      event.stopPropagation();
+      return false;
+    }
+  };
+
+  document.addEventListener("contextmenu", (event) => {
+    event.preventDefault();
+  }, { capture: true });
+
+  document.addEventListener("keydown", blocked, { capture: true });
+  document.addEventListener("dragstart", (event) => {
+    if (event.target && event.target.tagName === "IMG") event.preventDefault();
+  }, { capture: true });
+})();
+
+</script>
 </body>
+
 </html>
